@@ -130,7 +130,7 @@ See: `../../../../../.kiro/steering/test_driven_design.md`
 ## File Structure
 
 ```
-subgems/runtime/heartbeat/
+submodules/active_data_flow-runtime-heartbeat/
 ├── app/
 │   ├── controllers/active_data_flow/runtime/heartbeat/
 │   ├── models/active_data_flow/runtime/heartbeat/
