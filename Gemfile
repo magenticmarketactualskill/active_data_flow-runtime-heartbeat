@@ -12,6 +12,5 @@ gemspec
 # Development dependencies
 group :development, :test do
   gem 'minitest'
-  gem 'minitest-pride'
   gem 'rspec'
 end
