@@ -1,0 +1,37 @@
+# frozen_string_literal: true
+
+module ActiveDataFlow
+  module Runtime
+    module Heartbeat
+      class ScheduleFlowRuns
+        attr_accessor :data_flow_runs_due, :triggered_count
+ 
+        def self.create
+          new.execute
+        end
+
+        def initialize
+          Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] initialize "
+          @triggered_count = 0
+          execute
+          return self
+        end
+
+        def execute
+          @data_flow_runs_due = DataFlowRun.due_to_run
+          Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] execute @data_flow_runs_due.conout: #{@data_flow_runs_due.count}"
+        end
+
+        def each_flow_run_due(&block)
+          @data_flow_runs_due.each do |flow_run|
+            yield(flow_run)
+            @triggered_count += 1
+          rescue => e
+            Rails.logger.error("Flow Run execution failed at @triggered_count: #{@triggered_count}: #{e.message}")
+            # Continue with next flow
+          end
+        end
+      end
+    end
+  end
+end

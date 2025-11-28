@@ -3,7 +3,7 @@
 module ActiveDataFlow
   module Runtime
     module Heartbeat
-      class FlowExecutor
+      class FlowRunExecutor
         def self.execute(data_flow_run)
           new(data_flow_run).execute
         end
@@ -14,7 +14,7 @@ module ActiveDataFlow
         end
 
         def execute
-          Rails.logger.info "[FlowExecutor] Starting execution for run #{@data_flow_run.id}: #{@data_flow.name}"
+          Rails.logger.info "[FlowRunExecutor] Starting: #{@data_flow.name}: run #{@data_flow_run.id}"
           
           # Mark run as in progress and schedule next run
           @data_flow.mark_run_started!(@data_flow_run)
