@@ -18,8 +18,9 @@ module ActiveDataFlow
         end
 
         def execute
+          Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] execute"
           @data_flow_runs_due = DataFlowRun.due_to_run
-          Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] execute @data_flow_runs_due.conout: #{@data_flow_runs_due.count}"
+          Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] execute @data_flow_runs_due.count: #{@data_flow_runs_due.count}"
         end
 
         def each_flow_run_due(&block)
