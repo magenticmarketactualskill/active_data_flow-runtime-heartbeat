@@ -11,20 +11,14 @@ module ActiveDataFlow
         end
 
         def initialize
-          Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] initialize "
           @triggered_count = 0
-          execute
-          return self
-        end
-
-        def execute
-          Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] execute"
           @data_flow_runs_due = DataFlowRun.due_to_run
-          Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] execute @data_flow_runs_due.count: #{@data_flow_runs_due.count}"
+          Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] initialized with  #{@data_flow_runs_due.length} data_flow_runs_due"
         end
 
         def each_flow_run_due(&block)
           @data_flow_runs_due.each do |flow_run|
+            Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] each_flow_run_due.yield flow_run:#{flow_run}"
             yield(flow_run)
             @triggered_count += 1
           rescue => e

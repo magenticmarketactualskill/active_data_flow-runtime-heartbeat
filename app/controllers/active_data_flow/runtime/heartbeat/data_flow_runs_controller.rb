@@ -8,7 +8,7 @@ module ActiveDataFlow
         def heartbeat_event
           Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::DataFlowsController.heartbeat_event] called"
           
-          ::ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns.create.each_flow_run_due do |flow_run|
+          ::ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns.new.each_flow_run_due do |flow_run|
             FlowRunExecutor.execute(flow_run)
           end
 
