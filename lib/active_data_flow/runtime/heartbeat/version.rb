@@ -3,7 +3,7 @@
 module ActiveDataFlow
   module Runtime
     module Heartbeat
-      VERSION = "0.1.29"
+      VERSION = "0.1.30"
     end
   end
 end
