@@ -16,6 +16,12 @@ module ActiveDataFlow
           Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] initialized with  #{@data_flow_runs_due.length} data_flow_runs_due"
         end
 
+        def execute
+          each_flow_run_due do |flow_run|
+            FlowRunExecutor.execute(flow_run)
+          end
+        end
+
         def each_flow_run_due(&block)
           @data_flow_runs_due.each do |flow_run|
             Rails.logger.info "[ActiveDataFlow::Runtime::Heartbeat::ScheduleFlowRuns] each_flow_run_due.yield flow_run:#{flow_run}"
