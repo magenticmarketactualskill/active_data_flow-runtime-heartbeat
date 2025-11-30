@@ -7,7 +7,7 @@ module ActiveDataFlow
                 
                 def initialize(options = {})
                     @message_id_calc = options[:message_id_calc] || lambda { |message| message['id'] }
-                    @transform_collision = options[:transform_collision] || false
+                    @transform_collision = options[:transform_collision] || true
 
                 end
             end
