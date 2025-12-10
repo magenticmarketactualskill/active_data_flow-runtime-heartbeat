@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Runtime dependencies
+  spec.add_dependency "active_data_flow", "~> 0.1"
   spec.add_dependency "rails", ">= 6.0"
 
   # Development dependencies
